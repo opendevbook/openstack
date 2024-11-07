@@ -82,11 +82,11 @@ cat <<EOF >> local.conf
 IP_VERSION=4
 SERVICE_IP_VERSION=4
 TUNNEL_IP_VERSION=4
-HOST_IP=192.168.121.168
-SERVICE_HOST=192.168.121.168
-MYSQL_HOST=192.168.121.168
-RABBIT_HOST=192.168.121.168
-GLANCE_HOSTPORT=192.168.121.168:9292
+HOST_IP=192.168.35.10
+SERVICE_HOST=192.168.35.10
+MYSQL_HOST=192.168.35.10
+RABBIT_HOST=192.168.35.10
+GLANCE_HOSTPORT=192.168.35.10:9292
 ADMIN_PASSWORD=secret
 DATABASE_PASSWORD=\$ADMIN_PASSWORD
 RABBIT_PASSWORD=\$ADMIN_PASSWORD
@@ -106,6 +106,7 @@ $ ./stack.sh
 ```
 This will take a 15 - 20 minutes, largely depending on the speed of your internet connection. Many git trees and packages will be installed during this process.
 
+![](../assets/images/success_install.png)
 
 !!! note "Other command"
 
@@ -119,9 +120,24 @@ This will take a 15 - 20 minutes, largely depending on the speed of your interne
     ```
     login with user admin and password specified in ADMIN_PASSWORD in local.conf
 
+![](../assets/images/openstack_dashboard.png)
+
+![](../assets/images/openstak_login.png)
+
 - Step 7 Verify the installation
     - to check if services are running
     ``` bash
     $ source openrc admin admin
     $ openstack service list
     ```
+
+![](../assets/images/openstack_service_list.png)
+
+- Step 8 Restart the DevStack Services: 
+To "restack" OpenStack after stopping DevStack or halting your environment, you can follow these steps:
+
+```
+Run ./unstack.sh to stop the services (optional).
+Run ./clean.sh (optional, for a clean restart).
+Run ./stack.sh to restart the setup.
+```
