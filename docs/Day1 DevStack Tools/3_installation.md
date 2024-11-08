@@ -75,7 +75,7 @@ DevStack works best on a fresh installation of a supported Linux distribution, l
     $ cd devstack
     ```
 
-    Create local.conf inside devstack folder
+    Create local.conf inside devstack folder, Please copy content below and paste directly in terminal
 ```
 cat <<EOF >> local.conf
 [[local|localrc]]
