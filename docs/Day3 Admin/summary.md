@@ -52,6 +52,14 @@ OpenStack เป็นแพลตฟอร์มโอเพ่นซอร์�
 - **Skyline UI**: ส่วนติดต่อผู้ใช้แบบใหม่ที่ใช้งานง่ายและทันสมัย
 - รองรับ Workload ที่หลากหลาย เช่น AI, HPC และ Machine Learning
 
+![](../assets/images/skyline_ui.jpg)
+
+## Watch Skyline UI introduction
+
+![](../assets/images/skyline_ui2.jpg)
+
+[https://www.youtube.com/watch?v=pFAJLwzxv0A](https://www.youtube.com/watch?v=pFAJLwzxv0A)
+
 ### อ้างอิง
 
 - [OpenStack Documentation](https://docs.openstack.org)
