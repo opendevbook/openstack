@@ -84,7 +84,7 @@ $ sudo -u stack -i
 ## เปลี่ยน Repository ของ Ubuntu
 
 ```
-$ sudo sed -i 's/mirrors.edge.kernel.org/old-releases.ubuntu.com/g' /etc/apt/sources.list
+$ sudo sed -i 's/mirrors.edge.kernel.org/mirror1.ku.ac.th/g' /etc/apt/sources.list
 ```
 
 ## Download โค้ด devstack
