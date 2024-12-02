@@ -92,7 +92,32 @@ $ sudo -u stack -i
 ## เปลี่ยน Repository ของ Ubuntu
 
 ```
-$ sudo sed -i 's/mirrors.edge.kernel.org/mirror1.ku.ac.th/g' /etc/apt/sources.list
+cd /etc/apt/sources.list.d
+sudo vim ubuntu.sources
+```
+
+```
+Types: deb
+URIs: http://de.archive.ubuntu.com/ubuntu/
+Suites: noble noble-updates noble-backports
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+Types: deb
+URIs: http://security.ubuntu.com/ubuntu/
+Suites: noble-security
+Components: main restricted universe multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+
+```
+
+- เปลี่ยน de.archive.ubuntu.com เป็น mirror1.ku.ac.th
+
+### update
+
+```
+sudo apt update -y
+sudo apt upgrade -y
 ```
 
 ## Download โค้ด devstack
