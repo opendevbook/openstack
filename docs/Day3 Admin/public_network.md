@@ -1,6 +1,14 @@
 # Study public network
 
-## เปลี่ยน Vagrantfile
+## ubuntu Version
+
+![](../assets/images/ubuntu_version.png)
+
+## Repository list
+
+![](../assets/images/ubuntu_distro.png)
+
+## เปลี่ยน Vagrantfile 'bento/ubuntu-24.04'
 
 ```ruby title="add more interface"
 # -*- mode: ruby -*-
@@ -12,7 +20,7 @@ $script=<<-SCRIPT
 SCRIPT
 Vagrant.configure("2") do |config|
 
-  config.vm.box = "generic/ubuntu2310"
+  config.vm.box = "bento/ubuntu-24.04"
 
   config.vm.define "node1" do |control|
     control.vm.hostname = "node1"
