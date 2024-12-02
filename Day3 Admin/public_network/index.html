@@ -1,0 +1,1387 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Day2%20Python/python-module/">
+      
+      
+        <link rel="next" href="../summary/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.47">
+    
+    
+      
+        <title>Study public network - Openstack with Devstack</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#study-public-network" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Openstack with Devstack" class="md-header__button md-logo" aria-label="Openstack with Devstack" data-md-component="logo">
+      
+  <img src="../../assets/images/openstacklogo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Openstack with Devstack
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Study public network
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="purple"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="lime"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+    
+  
+  OpenStack Summary
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Day1%20DevStack%20Tools/1_basic/" class="md-tabs__link">
+          
+  
+  Day1 DevStack Tools
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Day2%20Python/oop-tutorial/" class="md-tabs__link">
+          
+  
+  Day2 Python
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  Day3 Admin
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Openstack with Devstack" class="md-nav__button md-logo" aria-label="Openstack with Devstack" data-md-component="logo">
+      
+  <img src="../../assets/images/openstacklogo.png" alt="logo">
+
+    </a>
+    Openstack with Devstack
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OpenStack Summary
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Day1 DevStack Tools
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Day1 DevStack Tools
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day1%20DevStack%20Tools/1_basic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevStack Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day1%20DevStack%20Tools/2_vagrant/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vagrant prepare VM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day1%20DevStack%20Tools/3_installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day1%20DevStack%20Tools/4_workshop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workshop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Day2 Python
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Day2 Python
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day2%20Python/oop-tutorial/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Understand Python OOP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day2%20Python/openstack-sdk/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Openstack RESTFULL API
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Day2%20Python/python-module/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Python Module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Day3 Admin
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Day3 Admin
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Study public network
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Study public network
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ubuntu-version" class="md-nav__link">
+    <span class="md-ellipsis">
+      ubuntu Version
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Repository list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vagrantfile-bentoubuntu-2404" class="md-nav__link">
+    <span class="md-ellipsis">
+      เปลี่ยน Vagrantfile 'bento/ubuntu-24.04'
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#server" class="md-nav__link">
+    <span class="md-ellipsis">
+      สั่งคำสั่ง สร้าง server
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#kernel-parameter" class="md-nav__link">
+    <span class="md-ellipsis">
+      kernel parameter
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stack-user" class="md-nav__link">
+    <span class="md-ellipsis">
+      เพิ่ม stack user
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sudo-user-stack" class="md-nav__link">
+    <span class="md-ellipsis">
+      เพิ่ม สิทธิ์ sudo ให้แก่ user stack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#repository-ubuntu" class="md-nav__link">
+    <span class="md-ellipsis">
+      เปลี่ยน Repository ของ Ubuntu
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="เปลี่ยน Repository ของ Ubuntu">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#update" class="md-nav__link">
+    <span class="md-ellipsis">
+      update
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-devstack" class="md-nav__link">
+    <span class="md-ellipsis">
+      Download โค้ด devstack
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      สร้าง ไฟล์ local.conf
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      เมื่อติดตั้ง เรียบร้อย
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-ip-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      รายละเอียด ของ network ip a
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../summary/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    สรุป ความเข้าใจ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workshop/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Workshop
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="study-public-network">Study public network</h1>
+<h2 id="ubuntu-version">ubuntu Version</h2>
+<p><img alt="" src="../../assets/images/ubuntu_version.png" /></p>
+<h2 id="repository-list">Repository list</h2>
+<p><img alt="" src="../../assets/images/ubuntu_distro.png" /></p>
+<h2 id="vagrantfile-bentoubuntu-2404">เปลี่ยน Vagrantfile 'bento/ubuntu-24.04'</h2>
+<div class="highlight"><span class="filename">add more interface</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># -*- mode: ruby -*-</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="c1"># vi: set ft=ruby :</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="vg">$script</span><span class="o">=&lt;&lt;-</span><span class="dl">SCRIPT</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="sh">    sed -i &#39;s/PasswordAuthentication no/PasswordAuthentication yes/g&#39; /etc/ssh/sshd_config</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sh">    systemctl restart ssh.service</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="dl">SCRIPT</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;bento/ubuntu-24.04&quot;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;node1&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">control</span><span class="o">|</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;node1&quot;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.35.10&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.40.10&quot;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">&quot;virtualbox&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;8192&quot;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">customize</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;modifyvm&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--nested-hw-virt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="o">]</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;node2&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">control</span><span class="o">|</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;node2&quot;</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.35.20&quot;</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.40.20&quot;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="n">control</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provider</span><span class="w"> </span><span class="s2">&quot;virtualbox&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">vb</span><span class="o">|</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">memory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;8192&quot;</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">cpus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">      </span><span class="n">vb</span><span class="o">.</span><span class="n">customize</span><span class="w"> </span><span class="o">[</span><span class="s2">&quot;modifyvm&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:id</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;--nested-hw-virt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;on&quot;</span><span class="o">]</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">    </span><span class="k">end</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">  </span><span class="k">end</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="vg">$script</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="k">end</span>
+</code></pre></div>
+<h2 id="server">สั่งคำสั่ง สร้าง server</h2>
+<div class="highlight"><span class="filename">vagrant up</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>vagrant<span class="w"> </span>up
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>vagrant<span class="w"> </span>ssh<span class="w"> </span>node1
+</code></pre></div>
+<h2 id="kernel-parameter">kernel parameter</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>sudo vim /etc/sysctl.conf
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>net.ipv6.conf.all.disable_ipv6 = 0
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>net.ipv6.conf.default.disable_ipv6 = 0
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>net.ipv6.conf.lo.disable_ipv6 = 0
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>net.ipv4.conf.default.rp_filter = 0
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>net.ipv4.conf.all.rp_filter = 0
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>net.ipv4.ip_forward = 1
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>sudo sysctl -p
+</code></pre></div>
+<h2 id="stack-user">เพิ่ม stack user</h2>
+<div class="highlight"><span class="filename">create user</span><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>$<span class="w"> </span>sudo<span class="w"> </span>useradd<span class="w"> </span>-s<span class="w"> </span>/bin/bash<span class="w"> </span>-d<span class="w"> </span>/opt/stack<span class="w"> </span>-m<span class="w"> </span>stack
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>$<span class="w"> </span>sudo<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/opt/stack
+</code></pre></div>
+<h2 id="sudo-user-stack">เพิ่ม สิทธิ์ sudo ให้แก่ user stack</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>$ echo &quot;stack ALL=(ALL) NOPASSWD: ALL&quot; | sudo tee /etc/sudoers.d/stack
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>$ sudo -u stack -i
+</code></pre></div>
+<h2 id="repository-ubuntu">เปลี่ยน Repository ของ Ubuntu</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>cd /etc/apt/sources.list.d
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>sudo vim ubuntu.sources
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Types: deb
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>URIs: http://de.archive.ubuntu.com/ubuntu/
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>Suites: noble noble-updates noble-backports
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>Components: main restricted universe multiverse
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>Types: deb
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>URIs: http://security.ubuntu.com/ubuntu/
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>Suites: noble-security
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>Components: main restricted universe multiverse
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
+</code></pre></div>
+<ul>
+<li>เปลี่ยน de.archive.ubuntu.com เป็น mirror1.ku.ac.th</li>
+</ul>
+<h3 id="update">update</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo apt update -y
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>sudo apt upgrade -y
+</code></pre></div>
+<h2 id="download-devstack">Download โค้ด devstack</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git clone https://opendev.org/openstack/devstack
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>cd devstack
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>vim local.conf
+</code></pre></div>
+<h2 id="localconf">สร้าง ไฟล์ local.conf</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>[[local|localrc]]
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>PUBLIC_INTERFACE=eth2
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>IP_VERSION=4
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>SERVICE_IP_VERSION=4
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>TUNNEL_IP_VERSION=4
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>HOST_IP=192.168.35.10
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>FLOATING_RANGE=192.168.40.100/27
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>SERVICE_HOST=192.168.35.10
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>MYSQL_HOST=192.168.35.10
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>RABBIT_HOST=192.168.35.10
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>GLANCE_HOSTPORT=192.168.35.10:9292
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>ADMIN_PASSWORD=secret
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>DATABASE_PASSWORD=$ADMIN_PASSWORD
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>RABBIT_PASSWORD=$ADMIN_PASSWORD
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>SERVICE_PASSWORD=$ADMIN_PASSWORD
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>LOGFILE=/opt/stack/logs/stack.sh.log
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>FORCE=yes
+</code></pre></div>
+<p><img alt="" src="../../assets/images/new_local_conf.png" /></p>
+<h2 id="_1">เมื่อติดตั้ง เรียบร้อย</h2>
+<p><img alt="" src="../../assets/images/install_success.png" /></p>
+<h2 id="network-ip-a">รายละเอียด ของ network ip a</h2>
+<p><img alt="" src="../../assets/images/interface_linux.png" /></p>
+<h1 id="localrc-openstack-devstack">ไฟล์ <code>localrc</code> สำหรับการติดตั้ง OpenStack (DevStack)</h1>
+<p>ไฟล์นี้กำหนดค่าพื้นฐานสำหรับการตั้งค่า OpenStack ผ่าน DevStack โดยเฉพาะในสภาพแวดล้อมสำหรับการพัฒนาหรือทดลองใช้งาน</p>
+<h2 id="_2">คำอธิบายค่าพารามิเตอร์</h2>
+<h3 id="_3">การตั้งค่าเครือข่าย</h3>
+<ul>
+<li>
+<p><strong><code>PUBLIC_INTERFACE=eth2</code></strong><br />
+  กำหนดชื่ออินเทอร์เฟซเครือข่ายที่ใช้สำหรับเชื่อมต่อเครือข่ายภายนอก (External Network)</p>
+</li>
+<li>
+<p><strong><code>IP_VERSION=4</code></strong>, <strong><code>SERVICE_IP_VERSION=4</code></strong>, <strong><code>TUNNEL_IP_VERSION=4</code></strong><br />
+  ระบุการใช้ IPv4 สำหรับเครือข่าย:</p>
+</li>
+<li>
+<p>การสื่อสารทั่วไป (IP Version)</p>
+</li>
+<li>การสื่อสารบริการ (Service IP)</li>
+<li>
+<p>การสื่อสารผ่าน tunnel (Tunnel IP)</p>
+</li>
+<li>
+<p><strong><code>HOST_IP=192.168.35.10</code></strong><br />
+  ที่อยู่ IP ของโฮสต์ที่ใช้รัน DevStack</p>
+</li>
+<li>
+<p><strong><code>FLOATING_RANGE=192.168.40.100/27</code></strong><br />
+  ช่วงที่อยู่ IP สำหรับ Floating IP เพื่อเชื่อมต่อ VM กับเครือข่ายภายนอก</p>
+</li>
+</ul>
+<h3 id="_4">การตั้งค่าบริการ</h3>
+<ul>
+<li>
+<p><strong><code>SERVICE_HOST=192.168.35.10</code></strong><br />
+  ระบุโฮสต์ที่ใช้รันบริการ OpenStack ทั้งหมด</p>
+</li>
+<li>
+<p><strong><code>MYSQL_HOST=192.168.35.10</code></strong><br />
+  ระบุโฮสต์ที่ติดตั้งฐานข้อมูล MySQL</p>
+</li>
+<li>
+<p><strong><code>RABBIT_HOST=192.168.35.10</code></strong><br />
+  ระบุโฮสต์ที่ติดตั้ง RabbitMQ (Message Queue)</p>
+</li>
+<li>
+<p><strong><code>GLANCE_HOSTPORT=192.168.35.10:9292</code></strong><br />
+  ระบุ Endpoint ของ Glance สำหรับจัดการ Image</p>
+</li>
+</ul>
+<h3 id="_5">การตั้งค่ารหัสผ่าน</h3>
+<ul>
+<li>
+<p><strong><code>ADMIN_PASSWORD=secret</code></strong><br />
+  รหัสผ่านของผู้ดูแลระบบ (Admin)</p>
+</li>
+<li>
+<p><strong><code>DATABASE_PASSWORD=$ADMIN_PASSWORD</code></strong><br />
+  รหัสผ่านสำหรับเข้าถึงฐานข้อมูล</p>
+</li>
+<li>
+<p><strong><code>RABBIT_PASSWORD=$ADMIN_PASSWORD</code></strong><br />
+  รหัสผ่านสำหรับ RabbitMQ</p>
+</li>
+<li>
+<p><strong><code>SERVICE_PASSWORD=$ADMIN_PASSWORD</code></strong><br />
+  รหัสผ่านสำหรับเข้าถึงบริการอื่น ๆ</p>
+</li>
+</ul>
+<h3 id="logs">การจัดการ Logs และการบังคับติดตั้ง</h3>
+<ul>
+<li>
+<p><strong><code>LOGFILE=/opt/stack/logs/stack.sh.log</code></strong><br />
+  ระบุไฟล์สำหรับบันทึก log ของ DevStack</p>
+</li>
+<li>
+<p><strong><code>FORCE=yes</code></strong><br />
+  บังคับให้ DevStack ดำเนินการติดตั้งต่อแม้จะมีข้อผิดพลาดบางประการ</p>
+</li>
+</ul>
+<hr />
+<h3 id="_6">อ้างอิง</h3>
+<ul>
+<li><a href="https://docs.openstack.org/devstack/latest/">DevStack Documentation</a></li>
+</ul>
+<h1 id="br-ex-openstack-external-network">ความสำคัญของ <code>br-ex</code> ใน OpenStack สำหรับ External Network</h1>
+<p>อุปกรณ์ <strong><code>br-ex</code></strong> หรือ <strong>Bridge External</strong> ใน OpenStack มีบทบาทสำคัญในการเชื่อมโยงระหว่างเครือข่ายภายในของ OpenStack และเครือข่ายภายนอก เช่น อินเทอร์เน็ตหรือเครือข่ายองค์กร</p>
+<hr />
+<h2 id="br-ex">ความสำคัญของ <code>br-ex</code></h2>
+<ol>
+<li>
+<p><strong>จัดการ Floating IP</strong></p>
+</li>
+<li>
+<p><code>br-ex</code> ช่วยให้ Virtual Machines (VMs) สามารถเข้าถึงเครือข่ายภายนอกได้โดยผ่าน Floating IP</p>
+</li>
+<li>
+<p>Floating IP เป็น IP เสมือนที่ถูกกำหนดให้กับ VM เพื่อให้สามารถเข้าถึงได้จากภายนอก เช่น อินเทอร์เน็ต</p>
+</li>
+<li>
+<p><strong>การกำหนดเส้นทาง (Routing)</strong></p>
+</li>
+<li>
+<p>เส้นทางการรับส่งข้อมูลจาก External Network ถูกกำหนดผ่าน <code>br-ex</code> ไปยัง VM ผ่าน Neutron Service</p>
+</li>
+<li>
+<p>สนับสนุนการใช้งานทั้ง IPv4 และ IPv6</p>
+</li>
+<li>
+<p><strong>การเชื่อมต่อกับ Physical Interface</strong></p>
+</li>
+<li>
+<p><code>br-ex</code> ทำหน้าที่เป็นสะพานระหว่าง Virtual Bridge กับ Physical Interface จริง เช่น <code>eth2</code></p>
+</li>
+<li>
+<p>ช่วยให้ทราฟฟิกจากเครือข่ายจริงถูกส่งต่อไปยังระบบเสมือน</p>
+</li>
+<li>
+<p><strong>บทบาทใน Network Node</strong></p>
+</li>
+<li><code>br-ex</code> มักถูกใช้งานใน Network Node หรือ Controller Node เพื่อจัดการ External Network</li>
+<li>เป็นส่วนสำคัญของโครงสร้างระบบ Networking ใน OpenStack</li>
+</ol>
+<hr />
+<h2 id="br-ex_1">วิธีการตั้งค่า <code>br-ex</code></h2>
+<ol>
+<li><strong>สร้าง Virtual Bridge</strong><br />
+   สร้าง <code>br-ex</code> ด้วยคำสั่ง <code>ovs-vsctl</code>:</li>
+</ol>
+<div class="highlight"><span class="filename">devstack ทำให้แล้ว</span><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>ovs-vsctl<span class="w"> </span>add-br<span class="w"> </span>br-ex
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>ovs-vsctl<span class="w"> </span>add-port<span class="w"> </span>br-ex<span class="w"> </span>eth2
+</code></pre></div>
+<ol>
+<li>
+<p>เชื่อมต่อกับ Neutron
+   กำหนด External Network ให้เชื่อมต่อกับ br-ex ใน Neutron Configuration</p>
+</li>
+<li>
+<p>การกำหนด Floating Range
+   Floating IP ต้องถูกกำหนดในช่วงที่รองรับกับเครือข่ายภายนอก เช่น
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">FLOATING_RANGE</span><span class="o">=</span><span class="m">192</span>.168.40.100/27
+</code></pre></div></p>
+</li>
+</ol>
+<h1 id="network-address-cidr">วิธีการคำนวณ Network Address จาก CIDR</h1>
+<h2 id="network-address">ขั้นตอนการคำนวณ Network Address</h2>
+<ol>
+<li>
+<p><strong>แปลง IP Address เป็น Binary</strong></p>
+</li>
+<li>
+<p>แปลงแต่ละส่วน (Octet) ของ IP Address ให้เป็นเลขฐานสอง</p>
+</li>
+<li>
+<p>ตัวอย่าง:
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>IP Address: 192.168.40.100
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>Binary:     11000000.10101000.00101000.01100100
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>แปลง Subnet Mask จาก CIDR เป็น Binary</strong></p>
+</li>
+<li>
+<p>ใช้ค่า CIDR เพื่อระบุจำนวนบิตของ Subnet Mask</p>
+</li>
+<li>
+<p>ตัวอย่าง <code>/27</code> หมายถึง 27 บิตแรกเป็น <code>1</code> และบิตที่เหลือเป็น <code>0</code>
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>CIDR:        /27
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Subnet Mask: 11111111.11111111.11111111.11100000
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>ทำ AND Operation ระหว่าง Binary ของ IP Address และ Subnet Mask</strong></p>
+</li>
+<li>
+<p>ทำ AND (<code>1 AND 1 = 1</code>, <code>1 AND 0 = 0</code>, <code>0 AND 0 = 0</code>) ระหว่าง Binary ของ IP Address และ Subnet Mask</p>
+</li>
+<li>
+<p>ตัวอย่าง:
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>IP Address:     11000000.10101000.00101000.01100100
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>Subnet Mask:    11111111.11111111.11111111.11100000
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>Result:         11000000.10101000.00101000.01100000
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>แปลงผลลัพธ์กลับเป็นเลขฐานสิบ</strong></p>
+</li>
+<li>แปลง Binary ผลลัพธ์กลับเป็นรูปแบบ Decimal</li>
+<li>ตัวอย่าง:
+     <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>11000000.10101000.00101000.01100000 → 192.168.40.96
+</code></pre></div></li>
+</ol>
+<hr />
+<h1 id="_7">ข้อมูลพื้นฐาน</h1>
+<h3 id="cidr-27">CIDR: <code>/27</code></h3>
+<ul>
+<li>หมายถึง Subnet Mask เท่ากับ <code>255.255.255.224</code> (27 บิตสำหรับ Network, เหลือ 5 บิตสำหรับ Host)</li>
+<li>จำนวน IP ทั้งหมดใน Subnet: <span class="arithmatex">\( 2^5 = 32 \)</span></li>
+</ul>
+<h3 id="network-address_1">Network Address</h3>
+<ul>
+<li>ใช้ค่าเริ่มต้นของช่วง IP ใน Subnet</li>
+<li><strong>192.168.40.96</strong> (เป็น Network Address ของ Subnet ที่ครอบคลุม <code>192.168.40.100</code>)</li>
+</ul>
+<h3 id="broadcast-address">Broadcast Address</h3>
+<ul>
+<li>ใช้ค่า IP สุดท้ายของช่วง Subnet</li>
+<li><strong>192.168.40.127</strong></li>
+</ul>
+<h3 id="ip-usable-range">ช่วง IP ที่ใช้ได้ (Usable Range)</h3>
+<ul>
+<li>ลบ Network Address และ Broadcast Address ออก</li>
+<li><strong>Usable Range</strong>: <code>192.168.40.97</code> ถึง <code>192.168.40.126</code></li>
+</ul>
+<h2 id="ip">สรุปตาราง ip</h2>
+<table>
+<thead>
+<tr>
+<th><strong>ประเภท</strong></th>
+<th><strong>ค่า</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Network Address</strong></td>
+<td><code>192.168.40.96</code></td>
+</tr>
+<tr>
+<td><strong>Subnet Mask</strong></td>
+<td><code>255.255.255.224</code></td>
+</tr>
+<tr>
+<td><strong>Broadcast Address</strong></td>
+<td><code>192.168.40.127</code></td>
+</tr>
+<tr>
+<td><strong>Usable IP Range</strong></td>
+<td><code>192.168.40.97-126</code></td>
+</tr>
+<tr>
+<td><strong>จำนวน IP ใช้ได้</strong></td>
+<td><code>30 IP</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="br-ex-openstack">br-ex ใน OpenStack: อธิบายอย่างละเอียด</h2>
+<p>br-ex เป็นชื่อของ bridge หรือ สวิตช์เสมือน หนึ่งใน OpenStack ซึ่งมีบทบาทสำคัญในการเชื่อมต่อเครือข่ายภายในของเครื่องเสมือน (VM) เข้ากับเครือข่ายภายนอก ในสภาพแวดล้อมของ OpenStack ที่ใช้ Open vSwitch (OVS) เป็นหลัก br-ex จะทำหน้าที่เป็นจุดเชื่อมต่อระหว่างพอร์ตเครือข่ายทางกายภาพ (physical network interface) และพอร์ตเครือข่ายเสมือนที่สร้างขึ้นสำหรับ VM ต่างๆ</p>
+<p><strong>ทำไมถึงเรียกว่า br-ex?</strong></p>
+<ol>
+<li>br: ย่อมาจาก bridge หรือ สวิตช์ ซึ่งเป็นอุปกรณ์เครือข่ายที่ใช้เชื่อมต่อหลายๆ เครือข่ายเข้าด้วยกัน</li>
+<li>ex: อาจย่อมาจาก external หรือ exchange ซึ่งบ่งบอกว่า bridge นี้ทำหน้าที่เชื่อมต่อกับเครือข่ายภายนอก</li>
+</ol>
+<p><strong>บทบาทหลักของ br-ex</strong></p>
+<ol>
+<li>เชื่อมต่อเครือข่ายภายในกับภายนอก: br-ex จะเชื่อมต่อพอร์ตเครือข่ายทางกายภาพของเซิร์ฟเวอร์ที่ติดตั้ง OpenStack เข้ากับพอร์ตเครือข่ายเสมือนที่สร้างขึ้นสำหรับ VM ต่างๆ ทำให้ VM สามารถสื่อสารกับโลกภายนอกได้</li>
+<li>จัดการการรับส่งข้อมูล: br-ex จะทำหน้าที่รับส่งข้อมูลระหว่าง VM ต่างๆ และระหว่าง VM กับเครือข่ายภายนอก โดยอาศัยหลักการทำงานของ bridge ในการตัดสินใจว่าจะส่งแพ็กเก็ตข้อมูลไปยังพอร์ตใด</li>
+<li>สร้าง VLAN: br-ex สามารถใช้ในการสร้าง VLAN (Virtual Local Area Network) เพื่อแยกกลุ่มของ VM ออกจากกัน ทำให้แต่ละกลุ่มสามารถสื่อสารกันได้ภายในกลุ่มโดยไม่รบกวนกลุ่มอื่นๆ</li>
+</ol>
+<p><strong>การทำงานของ br-ex (ในภาพรวม)</strong></p>
+<ul>
+<li>เมื่อมีการสร้าง VM ขึ้นมา OpenStack จะสร้างพอร์ตเครือข่ายเสมือนขึ้นมาหนึ่งพอร์ต และเชื่อมต่อพอร์ตนี้เข้ากับ br-ex</li>
+<li>แพ็กเก็ตข้อมูลที่ส่งมาจาก VM จะถูกส่งผ่าน br-ex ไปยังพอร์ตเครือข่ายทางกายภาพที่เชื่อมต่อกับสวิตช์ภายนอก</li>
+<li>แพ็กเก็ตข้อมูลที่ส่งมาจากเครือข่ายภายนอกจะถูกส่งผ่าน br-ex เข้าไปยังพอร์ตเครือข่ายเสมือนของ VM ที่เป็นปลายทาง</li>
+</ul>
+<p><strong>สรุป</strong>
+br-ex เป็นองค์ประกอบสำคัญในสถาปัตยกรรมเครือข่ายของ OpenStack ที่ช่วยในการเชื่อมต่อและจัดการการรับส่งข้อมูลระหว่าง VM ต่างๆ และระหว่าง VM กับเครือข่ายภายนอก การทำความเข้าใจบทบาทของ br-ex จะช่วยให้ผู้ดูแลระบบสามารถแก้ไขปัญหาและปรับแต่งเครือข่ายของ OpenStack ได้อย่างมีประสิทธิภาพ</p>
+<p><strong>br-ex แตกต่างจาก Bridge อื่นๆ ใน OpenStack อย่างไร</strong></p>
+<p>br-ex เป็น bridge พิเศษใน OpenStack ที่มีบทบาทสำคัญในการเชื่อมต่อเครือข่ายภายในของเครื่องเสมือน (VM) เข้ากับเครือข่ายภายนอก โดยเฉพาะอย่างยิ่งในการส่งต่อ traffic จาก provider network ไปยัง physical network</p>
+<p>เพื่อให้เข้าใจความแตกต่างได้ชัดเจนขึ้น ลองเปรียบเทียบ br-ex กับ bridge อื่นๆ ที่พบได้ทั่วไปใน OpenStack เช่น br-int และ br-tun</p>
+<p><strong>br-ex vs. br-int</strong></p>
+<ul>
+<li>br-int: เป็น bridge ที่ใช้สำหรับเชื่อมต่อพอร์ตของ router (qg-xxx) เข้ากับ patch port ที่เชื่อมไปยัง br-ex ทำหน้าที่เป็นตัวกลางในการรับส่ง traffic ระหว่าง network provider กับ network tenant</li>
+<li>br-ex: ทำหน้าที่เชื่อมต่อ patch port จาก br-int เข้ากับพอร์ตทางกายภาพ (physical port) เพื่อส่ง traffic ออกไปยังเครือข่ายภายนอก</li>
+</ul>
+<p><strong>br-ex vs. br-tun</strong></p>
+<ul>
+<li>br-tun: ใช้สำหรับการสร้าง tunnel หรืออุโมงค์สำหรับการสื่อสารระหว่าง node ต่างๆ โดยเฉพาะอย่างยิ่งในกรณีที่ต้องการสร้างเครือข่าย overlay</li>
+<li>br-ex: ไม่ได้เกี่ยวข้องโดยตรงกับการสร้าง tunnel แต่มีหน้าที่ในการส่งต่อ traffic ที่ผ่าน tunnel มาแล้วไปยังเครือข่ายภายนอก
+  สรุป: br-tun เน้นเรื่องการสร้าง tunnel สำหรับการสื่อสารระหว่าง node ขณะที่ br-ex เน้นเรื่องการส่งต่อ traffic ออกไปยังเครือข่ายภายนอก</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Bridge</th>
+<th>หน้าที่หลัก</th>
+<th>เชื่อมต่อกับ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>br-ex</td>
+<td>เชื่อมต่อเครือข่ายภายในกับภายนอก</td>
+<td>patch port จาก br-int, พอร์ตทางกายภาพ</td>
+</tr>
+<tr>
+<td>br-int</td>
+<td>เชื่อมต่อ router กับ br-ex</td>
+<td>พอร์ตของ router, patch port ไปยัง br-ex</td>
+</tr>
+<tr>
+<td>br-tun</td>
+<td>สร้าง tunnel สำหรับการสื่อสารระหว่าง node</td>
+<td>node ต่างๆ</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="" src="../../assets/images/openstack-compute_network.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2024 <a href="https://github.com/opendevbook"  target="_blank" rel="noopener">Sawangpog muadphet</a>
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "toc.integrate", "navigation.top", "search.suggest", "search.highlight", "content.tabs.link", "content.code.annotation", "content.code.copy"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
